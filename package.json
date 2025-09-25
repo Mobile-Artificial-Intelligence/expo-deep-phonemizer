@@ -1,6 +1,6 @@
 {
   "name": "expo-deep-phonemizer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A expo module for using deep-phonemizer",
   "main": "build/src/index.js",
   "types": "build/src/index.d.ts",
@@ -40,11 +40,11 @@
   "devDependencies": {
     "@types/jest": "^30.0.0",
     "@types/react": "~19.0.0",
-    "expo": "~53.0.0",
+    "expo": "~53.0.22",
     "expo-module-scripts": "^4.1.10",
     "jest": "^29.7.0",
     "jest-expo": "^53.0.9",
-    "react-native": "0.79.1",
+    "react-native": "0.79.6",
     "ts-jest": "^29.4.1"
   },
   "peerDependencies": {
