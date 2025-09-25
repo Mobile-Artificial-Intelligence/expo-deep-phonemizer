@@ -46,18 +46,27 @@ export class DeepPhonemizer {
         return new DeepPhonemizer(session);
     }
 
-    async phonemize(text: string, lang: string = "en_us"): Promise<string> {
-        // Lowercase, remove punctuation and split to words
-        const words = text.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"").split(/\s+/);
-        const phonemes = [];
-
+    async phonemize(text: string, lang: string = "en_us", keepPunct = true): Promise<string> {
+        // Split into tokens: words or punctuation
+        const tokens = text.match(/\w+|[^\w\s]/g) || [];
+        const phonemes: string[] = [];
+        
         const dictionary = dictionaries[lang];
-        for (const word of words) {
-            const phoneme = dictionary[word] || await this._phonemize(word, lang);
-            phonemes.push(phoneme);
+        
+        for (const token of tokens) {
+            if (/^\w+$/.test(token)) {
+                // It's a word
+                const lower = token.toLowerCase();
+                const phoneme = dictionary[lower] || await this._phonemize(lower, lang);
+                phonemes.push(phoneme);
+            } else {
+                // It's punctuation or other non-word token
+                phonemes.push(keepPunct ? token : "");
+            }
         }
-
-        return phonemes.join(' ');
+    
+        return phonemes.join(' ').replace(/\s+([.,!?;:])/g, "$1"); 
+        // join with spaces, then fix spaces before punctuation
     }
 
     async _phonemize(text: string, lang: string = "en_us"): Promise<string> {
