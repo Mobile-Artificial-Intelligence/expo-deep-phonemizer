@@ -1,6 +1,6 @@
 {
   "name": "expo-deep-phonemizer",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A expo module for using deep-phonemizer",
   "main": "build/src/index.js",
   "types": "build/src/index.d.ts",
