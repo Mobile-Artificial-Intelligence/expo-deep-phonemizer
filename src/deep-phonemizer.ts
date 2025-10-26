@@ -23,14 +23,7 @@ export class DeepPhonemizer {
         this.session = session;
     }
 
-    static async load(): Promise<DeepPhonemizer> {
-        const asset = Asset.fromModule(require('../assets/deep-phonemizer.onnx'));
-        if (!asset.downloaded) {
-            console.log("Downloading Deep Phonemizer model...");
-            await asset.downloadAsync();
-        }
-
-        const modelPath = asset.localUri ?? asset.uri;
+    static async load_from_path(modelPath: string): Promise<DeepPhonemizer> {
         const options = {
             graphOptimizationLevel: 'all',
             enableCpuMemArena: true,
@@ -44,6 +37,18 @@ export class DeepPhonemizer {
         );
     
         return new DeepPhonemizer(session);
+    }
+
+    static async load(): Promise<DeepPhonemizer> {
+        const asset = Asset.fromModule(require('../assets/deep-phonemizer.onnx'));
+        if (!asset.downloaded) {
+            console.log("Downloading Deep Phonemizer model...");
+            await asset.downloadAsync();
+        }
+
+        const modelPath = asset.localUri ?? asset.uri;
+        
+        return DeepPhonemizer.load_from_path(modelPath);
     }
 
     async phonemize(
