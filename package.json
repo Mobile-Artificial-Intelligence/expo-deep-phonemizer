@@ -31,9 +31,10 @@
   "license": "MIT",
   "homepage": "https://github.com/danemadsen/expo-deep-phonemizer#readme",
   "dependencies": {
+    "expo": "~53.0.22",
     "expo-file-system": "^18.1.11",
     "onnxruntime-react-native": "^1.22.0",
-    "expo": "~53.0.22",
+    "onnxruntime-web": "^1.23.0",
     "react": "19.0.0",
     "react-native": "0.79.6"
   },
@@ -49,9 +50,9 @@
   },
   "peerDependencies": {
     "expo": "*",
+    "onnxruntime-react-native": "*",
     "react": "*",
-    "react-native": "*",
-    "onnxruntime-react-native": "*"
+    "react-native": "*"
   },
   "jest": {
     "preset": "ts-jest",
@@ -80,6 +81,9 @@
         }
       ]
     },
-    "extensionsToTreatAsEsm": [".ts", ".tsx"]
+    "extensionsToTreatAsEsm": [
+      ".ts",
+      ".tsx"
+    ]
   }
 }
